@@ -83,7 +83,7 @@ public class PaymentServiceImpl implements PaymentService {
 			Preconditions.checkNotNull(dateFrom);
 			Preconditions.checkNotNull(dateTo);
 			Preconditions.checkNotNull(fileName);
-			paymentReportGenerator.generateReport(calculatePaymentSchedule(dateFrom, dateTo), "test-file.csv");
+			paymentReportGenerator.generateReport(calculatePaymentSchedule(dateFrom, dateTo), fileName);
 
 		} catch (Exception e) {
 			throw new PaymentServiceException("Error calculating payment schedule", e);

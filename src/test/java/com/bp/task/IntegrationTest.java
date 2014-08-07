@@ -42,7 +42,8 @@ public class IntegrationTest {
 
 	@Test
 	public void testSuccess() throws Exception {
-		File expectedOutputFile = new File("src/test/resources/test-expected-output.csv");
+		
+		File expectedOutputFile = new File(ClassLoader.getSystemResource("test-expected-output.csv").toURI());
 		File actualOutputFile = new File("test-output.csv");
 		assertTrue("Actual CSV output is different to expected output", FileUtils.contentEquals(expectedOutputFile, actualOutputFile));
 
@@ -50,8 +51,9 @@ public class IntegrationTest {
 	
 	@Test
 	public void testFailure() throws Exception {
-		File expectedOutputFile = new File("src/test/resources/test-unexpected-output.csv");
-		File actualOutputFile = new File("test-output.csv");
+		
+		File expectedOutputFile = new File(ClassLoader.getSystemResource("test-unexpected-output.csv").toURI());
+		File actualOutputFile = new File("test-output.csv");	
 		assertFalse("Actual CSV output is the same as expected output", FileUtils.contentEquals(expectedOutputFile, actualOutputFile));
 	}
 
