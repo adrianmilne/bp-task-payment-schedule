@@ -15,7 +15,10 @@ public class PaymentServiceImpl implements PaymentService {
 	private static final int FRIDAY = 5;
 	private static final String MONTH_FORMAT = "MMMM";
 	
-	public PaymentSchedule calculatePaymentSchedule(DateTime dateFrom, DateTime dateTo) {
+	/**
+	 * {@inheritDoc}
+	 */
+	public PaymentSchedule calculatePaymentSchedule(final DateTime dateFrom, final DateTime dateTo) {
 		
 		List<PaymentDate> paymentDates = new ArrayList<PaymentDate>();
 		

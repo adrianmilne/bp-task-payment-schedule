@@ -5,5 +5,5 @@ import com.bp.task.domain.PaymentSchedule;
 
 public interface PaymentReportGenerator {
 
-	void generateReport(PaymentSchedule paymentSchedule);
+	void generateReport(PaymentSchedule paymentSchedule, String fileName);
 }

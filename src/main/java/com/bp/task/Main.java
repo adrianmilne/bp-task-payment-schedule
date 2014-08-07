@@ -22,7 +22,7 @@ public class Main {
 		DateTime dateFrom = new DateTime();
 		DateTime dateTo = new DateTime(Calendar.getInstance().get(Calendar.YEAR) + 1, 1, 1, 0, 0, 0, 0);
 		
-		paymentReportGenerator.generateReport(paymentService.calculatePaymentSchedule(dateFrom, dateTo));
+		paymentReportGenerator.generateReport(paymentService.calculatePaymentSchedule(dateFrom, dateTo), "/home/amilne/testfile.csv");
 		
 	}
 }
