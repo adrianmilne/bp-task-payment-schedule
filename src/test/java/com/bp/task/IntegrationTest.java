@@ -10,7 +10,6 @@ import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.bp.task.domain.PaymentSchedule;
 import com.bp.task.report.PaymentReportGenerator;
 import com.bp.task.report.PaymentReportGeneratorCSVImpl;
 import com.bp.task.service.PaymentService;
@@ -29,14 +28,16 @@ public class IntegrationTest {
 
 	@Before
 	public void setUp() {
-		paymentService = new PaymentServiceImpl();
-		paymentReportGenerator = new PaymentReportGeneratorCSVImpl();
 		
+		paymentReportGenerator = new PaymentReportGeneratorCSVImpl();
+		paymentService = new PaymentServiceImpl(paymentReportGenerator);
+		
+		// test date range covers all of 2014
 		DateTime dateFrom = new DateTime(2014, 1, 1, 0, 0, 0, 0);
 		DateTime dateTo = new DateTime(2014, 12, 31, 0, 0, 0, 0);
 
-		PaymentSchedule paymentSchedule = paymentService.calculatePaymentSchedule(dateFrom, dateTo);
-		paymentReportGenerator.generateReport(paymentSchedule, "test-output.csv");
+		paymentService.generatePaymentScheduleReport(dateFrom, dateTo, "test-output.csv");
+
 	}
 
 	@Test

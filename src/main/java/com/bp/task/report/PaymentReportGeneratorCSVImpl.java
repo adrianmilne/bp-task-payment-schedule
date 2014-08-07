@@ -1,28 +1,35 @@
 package com.bp.task.report;
 
 import java.io.FileWriter;
-import java.io.IOException;
 
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import com.bp.task.domain.PaymentDate;
+import com.bp.task.domain.MonthlyPayment;
 import com.bp.task.domain.PaymentSchedule;
 
+/**
+ * Implementation of {@link PaymentReportGenerator} which will output a
+ * PaymentSchedule in a CSV format.
+ * 
+ * @author adrianmilne
+ *
+ */
 public class PaymentReportGeneratorCSVImpl implements PaymentReportGenerator {
+
+	private static final String DATE_FORMAT = "dd/MM/yyyy";
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void generateReport(PaymentSchedule paymentSchedule, String fileName) {
+	public void generateReport(PaymentSchedule paymentSchedule, String fileName) throws ReportGenerationException {
 
-		System.out.println(paymentSchedule);
-		DateTimeFormatter fmt = DateTimeFormat.forPattern("dd/MM/yyyy");
+		DateTimeFormatter fmt = DateTimeFormat.forPattern(DATE_FORMAT);
 
 		try {
 			FileWriter writer = new FileWriter(fileName);
 
-			for (PaymentDate paymentDate : paymentSchedule.getPaymentDates()) {
+			for (MonthlyPayment paymentDate : paymentSchedule.getPaymentDates()) {
 				writer.append(paymentDate.getMonth());
 				writer.append(",");
 				writer.append(paymentDate.getSalaryPaymentDate().toString(fmt));
@@ -33,8 +40,9 @@ public class PaymentReportGeneratorCSVImpl implements PaymentReportGenerator {
 
 			writer.flush();
 			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+
+		} catch (Exception e) {
+			throw new ReportGenerationException("Error generating report", e);
 		}
 
 	}

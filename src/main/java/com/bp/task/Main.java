@@ -16,13 +16,13 @@ public class Main {
 		PaymentService paymentService;
 		PaymentReportGenerator paymentReportGenerator;
 		
-		paymentService = new PaymentServiceImpl();
 		paymentReportGenerator = new PaymentReportGeneratorCSVImpl();
+		paymentService = new PaymentServiceImpl(paymentReportGenerator);
 		
 		DateTime dateFrom = new DateTime();
 		DateTime dateTo = new DateTime(Calendar.getInstance().get(Calendar.YEAR) + 1, 1, 1, 0, 0, 0, 0);
 		
-		paymentReportGenerator.generateReport(paymentService.calculatePaymentSchedule(dateFrom, dateTo), "/home/amilne/testfile.csv");
+		paymentReportGenerator.generateReport(paymentService.calculatePaymentSchedule(dateFrom, dateTo), "testfile.csv");
 		
 	}
 }

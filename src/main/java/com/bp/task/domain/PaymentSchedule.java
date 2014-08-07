@@ -2,16 +2,22 @@ package com.bp.task.domain;
 
 import java.util.List;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
 import org.joda.time.DateTime;
 
-
+/**
+ * Immutable Domain Object which is a wrapper around a payment schedule (allowing us to add metadata to the schedule).
+ * 
+ * @author adrianmilne
+ *
+ */
 public class PaymentSchedule {
 
 	private final DateTime dateFrom;
 	private final DateTime dateTo;
-	private final List<PaymentDate> paymentDates;
+	private final List<MonthlyPayment> paymentDates;
 	
-	public PaymentSchedule(DateTime dateFrom, DateTime dateTo, List<PaymentDate> paymentDates) {
+	public PaymentSchedule(DateTime dateFrom, DateTime dateTo, List<MonthlyPayment> paymentDates) {
 		super();
 		this.dateFrom = dateFrom;
 		this.dateTo = dateTo;
@@ -19,6 +25,7 @@ public class PaymentSchedule {
 	}
 
 	/**
+	 * Starting date of the Payment Schedule.
 	 * @return the dateFrom
 	 */
 	public DateTime getDateFrom() {
@@ -26,6 +33,7 @@ public class PaymentSchedule {
 	}
 
 	/**
+	 * End Date of the Payment Schedule.
 	 * @return the dateTo
 	 */
 	public DateTime getDateTo() {
@@ -33,19 +41,19 @@ public class PaymentSchedule {
 	}
 	
 	/**
+	 * Monthly Payment Dates within the Schedule.
 	 * @return the paymentDates
 	 */
-	public List<PaymentDate> getPaymentDates() {
+	public List<MonthlyPayment> getPaymentDates() {
 		return paymentDates;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "PaymentSchedule [dateFrom=" + dateFrom + ", dateTo=" + dateTo + ", paymentDates=" + paymentDates + "]";
 	}
 
-	
+	public boolean equals(Object obj) {
+		return EqualsBuilder.reflectionEquals(this, obj);
+	}
 }
