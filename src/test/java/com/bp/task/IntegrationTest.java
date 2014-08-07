@@ -1,4 +1,4 @@
-package com.bp.task.service;
+package com.bp.task;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -13,6 +13,8 @@ import org.junit.Test;
 import com.bp.task.domain.PaymentSchedule;
 import com.bp.task.report.PaymentReportGenerator;
 import com.bp.task.report.PaymentReportGeneratorCSVImpl;
+import com.bp.task.service.PaymentService;
+import com.bp.task.service.PaymentServiceImpl;
 
 /**
  * Integration Test - which will test the system end to end to check inputs and outputs.
