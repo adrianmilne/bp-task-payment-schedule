@@ -15,7 +15,7 @@ import com.bp.task.service.PaymentServiceImpl;
  * Main Entry Point to the class.
  * 
  * Build the project using Maven, and run
- * "java -jar payment-scheduler-0.0.1-SNAPSHOT-jar-with-dependencies.jar" on the
+ * "java -jar payment-scheduler.jar" on the
  * command line to execute.
  * 
  * @author adrianmilne
