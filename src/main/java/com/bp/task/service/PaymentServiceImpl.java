@@ -21,7 +21,7 @@ import com.google.common.base.Preconditions;
 public class PaymentServiceImpl implements PaymentService {
 
 	private static Logger LOG = LoggerFactory.getLogger(PaymentServiceImpl.class);
-	
+
 	// Statics and Magic Numbers - could be exposed as configuration
 	private static final int WEDNESDAY = 3;
 	private static final int FRIDAY = 5;
@@ -31,8 +31,11 @@ public class PaymentServiceImpl implements PaymentService {
 	private PaymentReportGenerator paymentReportGenerator;
 
 	/**
-	 * Use of the constructor to inject the dependencies. Normally would use Spring to handle Dependcency Injection. 
-	 * @param paymentReportGenerator Payment Report Generator
+	 * Use of the constructor to inject the dependencies. Normally would use
+	 * Spring to handle Dependcency Injection.
+	 * 
+	 * @param paymentReportGenerator
+	 *            Payment Report Generator
 	 */
 	public PaymentServiceImpl(PaymentReportGenerator paymentReportGenerator) {
 		this.paymentReportGenerator = paymentReportGenerator;
@@ -43,6 +46,8 @@ public class PaymentServiceImpl implements PaymentService {
 	 */
 	public PaymentSchedule calculatePaymentSchedule(final DateTime dateFrom, final DateTime dateTo)
 			throws PaymentServiceException {
+
+		LOG.debug(String.format("Calculate Payment Schedule for Dates from [%s] to [%s]", dateFrom, dateTo));
 
 		try {
 			Preconditions.checkNotNull(dateFrom);
@@ -69,14 +74,17 @@ public class PaymentServiceImpl implements PaymentService {
 	 */
 	public void generatePaymentScheduleReport(DateTime dateFrom, DateTime dateTo, String fileName)
 			throws PaymentServiceException {
-		
+
+		LOG.debug(String.format("Generate payment schedule report for dates from [%s] to [%s], with filename [%s]",
+				dateFrom, dateTo, fileName));
+
 		try {
-			
+
 			Preconditions.checkNotNull(dateFrom);
 			Preconditions.checkNotNull(dateTo);
 			Preconditions.checkNotNull(fileName);
 			paymentReportGenerator.generateReport(calculatePaymentSchedule(dateFrom, dateTo), "test-file.csv");
-			
+
 		} catch (Exception e) {
 			throw new PaymentServiceException("Error calculating payment schedule", e);
 		}
