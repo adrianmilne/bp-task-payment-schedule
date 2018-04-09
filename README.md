@@ -33,7 +33,3 @@ To execute the JAR from a terminal - navigate to the directory containing the JA
 This will generate a CSV with the default name of PaymentSchedule.csv. Optionally - you can overwrite this by appending a filename parameter, e.g.:
 
 'java -jar payment-scheduler.jar MyFilename.csv'
-
-
-
-
